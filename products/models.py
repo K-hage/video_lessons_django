@@ -31,4 +31,4 @@ class AccessProduct(models.Model):
     )
 
     def __str__(self):
-        return self.user.verbose_name, self.product.title
+        return f'{self.user.username} имеет доступ к {self.product.title}'
