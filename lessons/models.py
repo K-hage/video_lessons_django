@@ -64,4 +64,4 @@ class LessonView(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.user.username + self.lesson.title
+        return f'{self.user.username} просмотрел {self.lesson.title}'
