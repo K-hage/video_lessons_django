@@ -160,5 +160,7 @@ cython_debug/
 .idea/
 
 #
+media/
+generator.py
 passwords.txt
 TODO.md
