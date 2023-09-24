@@ -5,24 +5,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-class LessonManager(models.Manager):
-    def create_lesson(self, title, video_path):
-        cap = cv2.VideoCapture(video_path)
-
-        if cap.isOpened():
-            frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-            frame_rate = int(cap.get(cv2.CAP_PROP_FPS))
-
-            duration = frame_count / frame_rate
-
-            cap.release()
-
-            lesson = self.create(title=title, video_path=video_path, duration=duration)
-            return lesson
-        else:
-            raise ValueError("Unable to open video file.")
-
-
 class Lesson(models.Model):
     title = models.CharField(
         max_length=255,
@@ -36,6 +18,9 @@ class Lesson(models.Model):
         verbose_name='длительность',
         blank=True,
         null=True,
+    )
+    product = models.ManyToManyField(
+        'products.Product'
     )
 
     def __str__(self):
