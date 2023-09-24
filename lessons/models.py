@@ -69,10 +69,14 @@ class LessonView(models.Model):
         verbose_name='Пользователь, просматривающий видео',
         on_delete=models.CASCADE
     )
-    view_time = models.DurationField(
+    view_time = models.PositiveIntegerField(
         verbose_name='Просмотрено'
     )
     viewed = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+        self.viewed = True if self.view_time >= 0.8 * self.lesson.duration else False
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return self.user.verbose_name, self.lesson.title
+        return self.user.username + self.lesson.title
