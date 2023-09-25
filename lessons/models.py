@@ -58,6 +58,10 @@ class LessonView(models.Model):
         verbose_name='Просмотрено'
     )
     viewed = models.BooleanField(default=False)
+    date_last_viewing = models.DateField(
+        verbose_name='Дата последнего просмотра',
+        auto_now=True,
+    )
 
     def save(self, *args, **kwargs):
         self.viewed = True if self.view_time >= 0.8 * self.lesson.duration else False

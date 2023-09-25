@@ -12,3 +12,9 @@ class LessonViewListSerializer(serializers.ModelSerializer):
     class Meta:
         model = LessonView
         fields = ('lesson', 'viewed', 'view_time')
+
+
+class ProductLessonListSerializer(LessonViewListSerializer):
+    class Meta:
+        model = LessonView
+        fields = ('lesson', 'viewed', 'view_time', 'date_last_viewing')
